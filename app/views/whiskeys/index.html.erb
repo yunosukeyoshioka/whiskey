@@ -1,0 +1,12 @@
+ <div class="content">
+ 	<% @whiskeys.each do |whiskey| %>
+ 		<%= whiskey.name %>
+ 		<%= whiskey.rank %>
+ 		<%= image_tag whiskey.img.to_s %>
+ 	<% end %>	 
+
+ </div>
+
+
+
+
