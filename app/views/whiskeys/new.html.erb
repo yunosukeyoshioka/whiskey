@@ -1,37 +1,40 @@
-<h1>ウイスキー新規投稿</h1>
-<%= form_for(@whiskey, url: whiskeys_path) do |f| %>       
-	<table>
-			<tr>
-			<td><%= f.file_field :image, class: "image" %></td>
- 
-    </tr>
-    <tr>
-      <td><label class="control-label sr-only">名称</label></td>
-      <td><%= f.text_field :name, class:"form-control", placeholder:"名称" %></td>
-    </tr>
-    <tr>
-      <td><label class="control-label">種別</label></td>
-      <td><%= f.collection_select(:genre_id, Genre.all, :id, :genre) %></td>
-    </tr>
-    <tr>
-      <td><label class="control-label">産地</label></td>
-      <td><%= f.collection_select :district_id, District.all, :id, :district %></td>            
-    </tr>
-    <tr>
-      <td><label class="control-label">広さ</label></td>
-      <td><%= f.collection_select :area_id, Area.all, :id, :width %></td>    
-    </tr>
-    <tr>
-      <td><label class="control-label">価格</label></td>
-      <td><%= f.text_field :price, class:"form-control", placeholder:"価格" %></td>      
-    </tr>
-    <tr>
-      <td><label class="control-label">説明</label></td>
-      <td><%= f.text_area :body, class:"form-control", placeholder:"説明" %></td>      
-    </tr>
-    <tr>
-       <td><%= f.submit "投稿", class:"btn btn-lg btn-base-1" %></td>
-    </tr>   
-  </table>        
-<% end %>
+<div class="content">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-4">  
+
+      <h1>ウイスキー新規投稿</h1>
+      <%= form_for(@whiskey, url: whiskeys_path) do |f| %>       
+      	<table>
+
+          <tr>
+            <td><label class="control-label sr-only">名称</label></td>
+            <td><%= f.text_field :name, class:"form-control", placeholder:"名称" %></td>
+          </tr>
+          	<tr>
+      			<td><%= f.file_field :image, class: "image" %></td>
+          </tr>
+          <tr>
+            <td><label class="control-label">種別</label></td>
+            <td><%= f.collection_select(:genre, Genre.all, :id, :genre) %></td>
+          </tr>
+          <tr>
+            <td><label class="control-label">産地</label></td>
+            <td><%= f.collection_select(:district, District.all, :id, :district) %></td>            
+          </tr>
+          <tr>
+            <td><label class="control-label">価格</label></td>
+            <td><%= f.text_field :price, class:"form-control", placeholder:"価格" %></td>      
+          </tr>
+          <tr>
+            <td><label class="control-label">説明</label></td>
+            <td><%= f.text_area :body, class:"form-control", placeholder:"説明" %></td>      
+          </tr>
+          <tr>
+             <td><%= f.submit "投稿", class:"btn btn-lg btn-base-1" %></td>
+          </tr>   
+        </table>        
+      <% end %>
+    </div>
+  </div>
+</div>    
 

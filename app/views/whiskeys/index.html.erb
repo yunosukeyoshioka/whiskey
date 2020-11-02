@@ -1,11 +1,52 @@
- <div class="content">
- 	<% @whiskeys.each do |whiskey| %>
- 		<%= whiskey.name %>
- 		<%= whiskey.rank %>
- 		<%= image_tag whiskey.img.to_s %>
- 	<% end %>	 
-
- </div>
+<section class="section mt-6">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <% @whiskeys.each do |whiskey| %>
+          <div class="card mb-6">
+            <header class="card-header">
+              <p class="card-header-title">
+                <%= whiskey.name %>
+              </p>
+            </header>
+            <div class="card-content">
+            
+							 	<div class="row">
+							 		<div class="col-sm-6">
+								 		<% if whiskey.image? %>
+								      <%= image_tag whiskey.image.to_s, size:'300x300' %> 
+								    <% else %>
+								      <%= image_tag "no_image.jpg", size:'300x300' %>    
+								    <% end %>
+								  </div>  
+								</div>	
+		 				 
+              <div class="content">
+                <div class="content average-score">
+                  <div class="star-rating mb-2">
+                    <div class="star-rating-front" style="width: %">★★★★★</div>
+                    <div class="star-rating-back">★★★★★</div>
+                  </div>
+                  <div class="average-score-display ml-3 pt-2">
+                    点（<%= whiskey.reviews.count %>件のレビュー）
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <%= link_to whiskey_reviews_path(whiskey), class: "button card-footer-item" do %>
+                レビューを見る
+              <% end %>
+              <%= link_to whiskey_path(whiskey), class: "button card-footer-item" do %>
+                詳細へ
+              <% end %>
+            </footer>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 

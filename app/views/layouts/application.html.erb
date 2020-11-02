@@ -8,21 +8,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="js/bootstrap.min.js"></script>
+     <script src="https://kit.fontawesome.com/484e6509e8.js" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </head>
-
   <body>
-
     <header class="topNavigation">
-       <p>ナビゲーション</p>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand text-dark" href="#">Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ">
+            <a class="nav-link text-dark" href="#"><%= link_to "新規投稿", new_whiskey_path %> <span class="sr-only">(current)</span></a>
+            <a class="nav-link text-dark" href="#skill"><%= link_to "トップへ戻る", whiskeys_path %></a>
+            <a class="nav-link text-dark" href="#works">Works</a>
+            <a class="nav-link text-dark" href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
     </header>
 
    
     <%= yield %>
+    
   </body>
 
 </html>

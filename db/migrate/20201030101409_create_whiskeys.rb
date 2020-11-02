@@ -6,8 +6,7 @@ class CreateWhiskeys < ActiveRecord::Migration[5.2]
       t.text :body
       t.integer :price
       t.string :image
-      t.float :rank
-
+    
       t.timestamps
     end
   end
