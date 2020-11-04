@@ -7,8 +7,14 @@ class WhiskeysController < ApplicationController
   def show
   	@whiskey = Whiskey.find(params[:id])
     @genre = @whiskey.genre
- 
+
     @review = Review.new
+
+    if @whiskey.reviews.blank?
+      @average_review = 0
+    else
+      @average_review = @whiskey.reviews.average(:rating).round(2)
+    end
   end
 
   def edit
@@ -19,7 +25,6 @@ class WhiskeysController < ApplicationController
   end
 
   def create
-
   	@whiskey = Whiskey.new(whiskey_params)
     @whiskey.genre_id = params[:whiskey][:genre]
     @whiskey.district_id = params[:whiskey][:district]
@@ -28,7 +33,6 @@ class WhiskeysController < ApplicationController
   	else 
   		flash[:danger] = '登録出来ませんでした。空欄の箇所はありませんか？'	
   		render "whiskeys/new"
-     
   	end	
 
   end	

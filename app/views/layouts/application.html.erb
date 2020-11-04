@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="js/bootstrap.min.js"></script>
+    
      <script src="https://kit.fontawesome.com/484e6509e8.js" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -25,8 +26,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ">
-            <a class="nav-link text-dark" href="#"><%= link_to "新規投稿", new_whiskey_path %> <span class="sr-only">(current)</span></a>
-            <a class="nav-link text-dark" href="#skill"><%= link_to "トップへ戻る", whiskeys_path %></a>
+            <a class="nav-link text-dark" href="#"><%= link_to "新規投稿", new_whiskey_path, class:"nav-link" %></a>
+            <a class="nav-link text-dark" href="#skill"><%= link_to "トップへ戻る", whiskeys_path, class:"nav-link"  %></a>
             <a class="nav-link text-dark" href="#works">Works</a>
             <a class="nav-link text-dark" href="#contact">Contact</a>
           </div>
