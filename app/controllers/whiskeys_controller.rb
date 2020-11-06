@@ -1,23 +1,24 @@
 class WhiskeysController < ApplicationController
   def index
-  	@whiskeys = Whiskey.all
+    #ransackのため一時的にコメントアウト
+  	#@whiskeys = Whiskey.all
+
+    @search = Whiskey.search(params[:q])
+    @whiskeys = @search.result
+
   end
 
 
   def show
   	@whiskey = Whiskey.find(params[:id])
     @genre = @whiskey.genre
-
-    @review = Review.new
-
-    if @whiskey.reviews.blank?
-      @average_review = 0
-    else
-      @average_review = @whiskey.reviews.average(:rating).round(2)
-    end
   end
 
   def edit
+  end
+
+  def whiskey_comments
+    @whiskey = Whiskey.find(params[:id])
   end
 
   def new
@@ -48,7 +49,7 @@ class WhiskeysController < ApplicationController
 
   private
   def whiskey_params
-  	params.require(:whiskey).permit(:name, :body, :price, :image, :genre_id, :district_id)
+  	params.require(:whiskey).permit(:name, :body, :price, :image, :genre_id, :district_id, :rating)
   end	
 
 end

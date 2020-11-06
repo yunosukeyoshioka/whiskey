@@ -1,30 +1,36 @@
 <section class="section mt-6">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-5">
+      <div class="column is-8">
         <div class="card mb-6">
           <header class="card-header">
-            <p class="card-header-title">
-              <%= @whiskey.name %>
-            </p>
-            <span>レビュー数<%= @whiskey.reviews.count %></span>
-            <div class="col-sm-6">
-					 		<% if @whiskey.image? %>
-					 			<%= image_tag @whiskey.image.to_s, size:'400x400' %>
-					    <% else %>
-					      <%= image_tag "no_image.jpg", size:'400x400' %>    
-					    <% end %>
-			  		</div>
-         	</header>
+            <div class="card-content">           
+              <div class="row">
+                <div class="col-xs-12">
+                  <p class="name"><%= @whiskey.name %></p>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div class="card-content">           
+            <div class="row">
+              <div class="text-center">           
+  					 		<% if @whiskey.image? %>
+  					 			<%= image_tag @whiskey.image.to_s, size:'300x300' %>
+  					    <% else %>
+  					      <%= image_tag "no_image.jpg", size:'300x300' %>    
+  					    <% end %>
+              </div>
+            </div>
+          </div> 
+			  		         
           <div class="card-content">
             <div class="content average-score">
               <div class="star-rating mb-2">
-                <div class="star-rating-front" style="width: %">★★★★★</div>
-                <div class="star-rating-back">★★★★★</div>
+              	<script src="assets/jquery.raty.js"></script>
+                <div class="average-review-rating" data-score="<%= @whiskey.rating %>"></div>
               </div>
-              <div class="average-score-display ml-3 pt-2">
-                点（<%= @whiskey.reviews.count %>件のレビュー）
-              </div>              
+                         
             </div>
 						<div>
 							<ul>
@@ -36,38 +42,26 @@
 									<li><%= link_to "削除", whiskeys_path, method: :delete %></li>
 								<% end %>
 							</ul>
+             
+              <div class="comment-list bt style-2" id="comments">
+                <div class="float-wrapper">
+                  <%= link_to whiskey_comments_whiskey_path(@whiskey), class: "comment fa fa-comment" do %>
+                    <%= @whiskey.post_comments.count %>件コメント
+                  <% end %>
+                </div>
+              </div>
+
+              <%= form_for [@whiskey, @whiskey.post_comments.build] do |f| %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                  </div>
+                </div>
+                <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20" %>
+              <% end %>
+                
 					 	</div>
           </div>
-        </div>
-        <div class="col-sm-12">
-        	<%# data-scoreに先ほど設定した@average_reviewのインスタンス変数を当てる。 %>
-					<div class="average-review-rating" data-score=<%= @average_review %> >平均スコア</div>
-					<script>
-					  $('.average-review-rating').raty({
-					    readOnly: true,
-					    path: '/assets/',
-					    score: function() {
-					      return $(this).attr('data-score')
-					    }
-					  });
-					</script>     
-					<div class="rating-box mt-3">
-				    <%= form_for ([@whiskey, @whiskey.reviews.build]) do |f| %>
-						  <div id="rating-form">
-						    <label>評価</label>
-						  </div>
-						  <%= f.text_field :content %>
-						  <%= f.submit "保存", class: "button mt-3" %>
-						  <%= link_to "他のレビューを見る", whiskey_reviews_path(@whiskey), class: "button light ml-3 mt-3" %>
-						<% end %>
-
-						<script>
-						  $('#rating-form').raty({
-						    path: '/assets/',
-						    scoreName: 'review[rating]'
-						  });
-						</script>
-					</div>					
 				</div>
       </div>
     </div>
@@ -75,14 +69,15 @@
 </section>
 
 <script>
-  $('.review-rating').raty({
+  $('.average-review-rating').raty({
     readOnly: true,
+    path: '/assets/',
     score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
+      return $(this).attr('data-score')
+    }
   });
-</script>
+</script>  
+
 
 
 

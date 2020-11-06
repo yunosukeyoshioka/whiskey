@@ -7,11 +7,8 @@
       	<table>
 
           <tr>
-            <td><label class="control-label sr-only">名称</label></td>
+            <td><label class="control-label">名称</label></td>
             <td><%= f.text_field :name, class:"form-control", placeholder:"名称" %></td>
-          </tr>
-          	<tr>
-      			<td><%= f.file_field :image, class: "image" %></td>
           </tr>
           <tr>
             <td><label class="control-label">種別</label></td>
@@ -23,18 +20,38 @@
           </tr>
           <tr>
             <td><label class="control-label">価格</label></td>
-            <td><%= f.text_field :price, class:"form-control", placeholder:"価格" %></td>      
+            <td><%= f.text_field :price, class:"form-control", placeholder:"¥" %></td>      
           </tr>
+           <tr>
+            <td><label class="control-label">評価</label></td>
+            <td id="rating-form"></td>
+          </tr>  
           <tr>
-            <td><label class="control-label">説明</label></td>
-            <td><%= f.text_area :body, class:"form-control", placeholder:"説明" %></td>      
+            <td><%= f.file_field :image, class: "image" %></td>
           </tr>
-          <tr>
-             <td><%= f.submit "投稿", class:"btn btn-lg btn-base-1" %></td>
-          </tr>   
-        </table>        
+        </table>  
+        <label class="control-label">説明</label>      
+         <p><%= f.text_area :body, size:'70x10', placeholder:"ストレート、ロック、ハイボールでの味わいや香りの違いなど" %></p>
+         <p><%= f.submit "投稿", class: "btn btn-lg btn btn-default" %></p>
       <% end %>
     </div>
   </div>
 </div>    
 
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>  
+
+
+<script>
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'whiskey[rating]'
+  });
+</script> 
