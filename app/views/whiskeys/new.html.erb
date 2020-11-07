@@ -1,6 +1,6 @@
 <div class="content">
   <div class="row">
-    <div class="col-md-6 col-md-offset-4">  
+    <div class="col-xs-6 col-xs-offset-4">  
 
       <h1>ウイスキー新規投稿</h1>
       <%= form_for(@whiskey, url: whiskeys_path) do |f| %>       
@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td><label class="control-label">価格</label></td>
-            <td><%= f.text_field :price, class:"form-control", placeholder:"¥" %></td>      
+            <td><%= f.text_field :price, class:"form-control", placeholder:"半角数字のみ" %></td>      
           </tr>
            <tr>
             <td><label class="control-label">評価</label></td>

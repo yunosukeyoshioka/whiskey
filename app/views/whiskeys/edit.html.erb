@@ -1,2 +1,59 @@
-<h1>Whiskeys#edit</h1>
-<p>Find me in app/views/whiskeys/edit.html.erb</p>
+<div class="content">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-4">  
+       <% unless @whiskey.save %>
+        <%= flash[:alert] %>
+       <% end %> 
+      <h1>ウイスキー新規投稿</h1>
+      <%= form_with(model: @whiskey, url:whiskey_path(@whiskey), local: true, method: :patch) do |f| %> 
+         
+      	<table>
+          <tr>
+            <td><label class="control-label">名称</label></td>
+            <td><%= f.text_field :name, class:"form-control", placeholder:"名称" %></td>
+          </tr>
+          <tr>
+            <td><label class="control-label">種別</label></td>
+            <td><%= f.collection_select(:genre, Genre.all, :id, :genre) %></td>
+          </tr>
+          <tr>
+            <td><label class="control-label">産地</label></td>
+            <td><%= f.collection_select(:district, District.all, :id, :district) %></td>            
+          </tr>
+          <tr>
+            <td><label class="control-label">価格</label></td>
+            <td><%= f.text_field :price, class:"form-control", placeholder:"¥" %></td>      
+          </tr>
+           <tr>
+            <td><label class="control-label">評価</label></td>
+            <td id="rating-form"></td>
+          </tr>  
+          <tr>
+            <td><%= f.file_field :image, class: "image" %></td>
+          </tr>
+        </table>  
+        <label class="control-label">説明</label>      
+         <p><%= f.text_area :body, size:'70x10', placeholder:"ストレート、ロック、ハイボールでの味わいや香りの違いなど" %></p>
+         <p><%= f.submit "編集", class: "btn btn-lg btn btn-default" %></p>
+      <% end %>
+    </div>
+  </div>
+</div>    
+
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>  
+
+
+<script>
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'whiskey[rating]'
+  });
+</script> 

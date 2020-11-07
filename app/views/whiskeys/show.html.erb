@@ -2,6 +2,7 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
+        <%= flash[:notice] %>
         <div class="card mb-6">
           <header class="card-header">
             <div class="card-content">           
@@ -38,9 +39,6 @@
 								<li>産地: <%= @whiskey.district.district %></li>
 								<li>購入価格: ¥<%= @whiskey.price %></li>
 								<li class="info"><%= @whiskey.body %></li>
-								<% if current_user = @whiskey.user %>
-									<li><%= link_to "削除", whiskeys_path, method: :delete %></li>
-								<% end %>
 							</ul>
              
               <div class="comment-list bt style-2" id="comments">
