@@ -3,19 +3,27 @@
     <div class="box col-xs-12 ">
       <table border="1">
         <thead>
-          <tr>
-            <th class="th">投稿日</th>
-            <th class="th">コメント</th>
-          </tr>
+        <% if @whiskey.post_comments.present? %>
+            <tr>
+              <th class="th">投稿日</th>
+              <th class="th">コメント</th>
+            </tr>
         </thead>
         <tbody>
           <% @whiskey.post_comments.each do |post_comment| %>
-          <tr>
-            <%#= post_comment.user.name %>    
-            <td class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-            <td class="comment-count"><%= post_comment.comment %></td>
-          </tr>
+            <tr>
+              <%#= post_comment.user.name %>    
+              <td class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+              <td class="comment-count"><%= post_comment.comment %></td>
+              <% unless current_user = post_comment.user_id %>
+                  <%= link_to "削除", whiskey_path, method: :delete %>
+                  <%= link_to "編集", edit_whiskey_path %>
+                <% end %>
+            </tr>
           <% end %>  
+        <% else %>
+          <h1>コメントはまだありません</h1> 
+        <% end %>   
         </tbody>
       </table> 
     </div>
